@@ -10,7 +10,8 @@ export function AttendeeList() {
        <div className="px-3  w-72 py-1.5 border border-white/10 
        rounded-lg text-sm flex item-center gap-3" >
        <Search  className="size-4 text-emerald-300"/>
-       <input className="bg-transparent flex-1 outline-none"
+       <input className="bg-transparent flex-1 outline-none h-auto 
+       border-0 p-0 text-sm ring-0"
         placeholder= "Search for Attendee..."/>
 
    </div>
@@ -23,7 +24,8 @@ export function AttendeeList() {
             <tr className="border-b border-white/10">
                <th style={{ width: 48 }}
                className="py-3 px-4 text-sm font-semibold text-left">
-            <input type="checkbox"/>
+            <input type="checkbox" className="size-4 bg-black/20 rounded 
+            border border-white/10checked:bg-orange-400"/>
             </th>
             <th className="py-3 px-4 text-sm font-semibold 
             text-left">Code</th>
@@ -40,9 +42,11 @@ export function AttendeeList() {
          <tbody>
            {Array.from({length: 10}).map((_, i ) => {
             return(
-               <tr key={i} className="border-b border-white/10">
+               <tr key={i} className="border-b border-white/10
+                hover:bg-white/5">
                <td className="py-3 px-4 text-sm text-zinc-300">
-            <input type="checkbox"/>
+            <input type="checkbox" className="size-4 bg-black/20 rounded 
+            border border-white/10 accent-orange-400"/>
             </td>
             <td className="py-3 px-4 text-sm text-zinc-300">1283</td>
             <td className="py-3 px-4 text-sm text-zinc-300">
