@@ -9,8 +9,8 @@ interface NavLinkProps extends ComponentProps<'a'> {
 
 export function NavLink(props: NavLinkProps) {
    return (
-      <a href={props.href} className="font-medium-sm">
-     {props.children}
+      <a {...props} href={props.href} className="font-medium-sm">
+     {props.children} 
      </a>
 
    )
