@@ -5,6 +5,7 @@ import { Table } from "../table/table";
 import { TableHeader } from "../table/table-header";
 import { TableCell } from "../table/table-cell";
 import { TableRow } from "../table/table-roll";
+import { attendees } from "../data/attendees";
 
 export function AttendeeList() {
    const [search, setSearch] = useState('')
@@ -50,24 +51,20 @@ export function AttendeeList() {
                   </tr>
                </thead>
                <tbody>
-                  {Array.from({ length: 10 }).map((_, i) => {
+                  {attendees.map((attendee) => {
                      return (
-                        <TableRow key={i}>
+                        <TableRow key={attendee.id}>
                            <TableCell>
-                              <div className="peer">
-                                 <input type="checkbox" id={`checkbox-${i}`} className="peer hidden" />
-                                 <label
-                                    htmlFor={`checkbox-${i}`}
-                                    className="inline-block w-4 h-4 bg-black/20 rounded border border-white/10 peer-checked:bg-orange-400"
-                                 ></label>
-                              </div>
+                                 <input type="checkbox"
+                                  className="size-4 bg-black/20 rounded border
+                                  border-white/10 accent-orange-400" />   
                            </TableCell>
-                           <TableCell>1283</TableCell>
+                           <TableCell>{attendee.id}</TableCell>
                            <TableCell>
                               <div className="flex flex-col gap-1">
                                  <span className="font-semibold
-                                  text-white">John Wats</span>
-                                 <span>JohnWats@email.com</span>
+                                  text-white">{attendee.name}</span>
+                                 <span>{attendee.email}</span>
                               </div>
                            </TableCell>
                            <TableCell>7 days ago</TableCell>
