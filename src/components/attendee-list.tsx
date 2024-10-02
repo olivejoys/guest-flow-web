@@ -2,6 +2,7 @@ import React from "react";
 import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from 'lucide-react'
 import { IconButton } from "./icon-button";
 import { Table } from "../table/table";
+import { TableHeader } from "../table/table-header";
 
 export function AttendeeList() {
    return (
@@ -21,7 +22,8 @@ export function AttendeeList() {
             <Table>
                <thead>
                   <tr className="border-b border-white/10">
-                     <th style={{ width: 48 }} className="py-3 px-4 text-sm font-semibold text-left">
+                     <TableHeader style={{ width: 48 }} className="py-3
+                      px-4 text-sm font-semibold text-left">
                         <div className="peer">
                            <input type="checkbox" id="main-checkbox" className="peer hidden" />
                            <label
@@ -29,13 +31,11 @@ export function AttendeeList() {
                               className="inline-block w-4 h-4 bg-black/20 rounded border border-white/10 peer-checked:bg-orange-400"
                            ></label>
                         </div>
-                     </th>
-                     <th className="py-3 px-4 text-sm font-semibold text-left">Code</th>
-                     <th className="py-3 px-4 text-sm font-semibold text-left">Attendee</th>
-                     <th className="py-3 px-4 text-sm font-semibold text-left">Subscription Date</th>
-                     <th style={{ width: 64 }} className="py-3 px-4 text-sm font-semibold text-left">
-                        Check-in Date
-                     </th>
+                     </TableHeader>
+                     <TableHeader >Code</TableHeader>
+                     <TableHeader >Attendee</TableHeader>
+                     <TableHeader>Subscription Date</TableHeader>
+                     <TableHeader style={{ width: 64 }}></TableHeader>
                   </tr>
                </thead>
                <tbody>
