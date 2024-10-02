@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from 'lucide-react'
 import { IconButton } from "./icon-button";
 import { Table } from "../table/table";
@@ -7,17 +7,26 @@ import { TableCell } from "../table/table-cell";
 import { TableRow } from "../table/table-roll";
 
 export function AttendeeList() {
+   const [search, setSearch] = useState('')
+   
+   function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
+      setSearch(event.target.value)
+      
+   }
+
    return (
       <div className="flex flex-col gap-4">
          <div className="flex gap-3 items-center">
             <h1 className="text-2xl font-bold">Attendees</h1>
             <div className="px-3 w-72 py-1.5 border border-white/10 rounded-lg text-sm flex items-center gap-3">
                <Search className="size-4 text-emerald-300" />
-               <input
+               <input onChange={onSearchInputChanged}
                   className="bg-transparent flex-1 outline-none h-auto border-0 p-0 text-sm ring-0"
                   placeholder="Search for Attendee..."
                />
             </div>
+
+            {search}
          </div>
 
          <div className="border border-white/10 rounded-lg">
