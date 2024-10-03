@@ -13,12 +13,17 @@ dayjs().format()
 dayjs.extend(relativeTime);
 
 
+
 export function AttendeeList() {
    const [search, setSearch] = useState('')
    const [page, setPage] = useState(1)
    function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
       setSearch(event.target.value)
       
+   }
+
+   function goToNextPage() {
+      setPage(page + 1)
    }
 
    return (
@@ -93,12 +98,12 @@ export function AttendeeList() {
                   <tr>
                      <TableCell className="py-3 px-4 text-sm
                       text-zinc-300" colSpan={3}>
-                        Showing 10 of 228 items
+                        Showing 10 of 228 items {attendees.length}
                      </TableCell>
                      <TableCell className="py-3 px-4 text-sm
                       text-zinc-300 text-right" colSpan={3}>
                         <div className="inline-flex items-center gap-8">
-                           <span>Page 1 of 23</span>
+                           <span>Page {page} of {Math.ceil(attendees.length / 10)}</span>
                            <div className="flex gap-1.5">
                               <IconButton>
                                  <ChevronsLeft className="size-4" />
@@ -106,7 +111,7 @@ export function AttendeeList() {
                               <IconButton>            
                                <ChevronLeft className="size-4" />
                               </IconButton>
-                              <IconButton>
+                              <IconButton onClick={goToNextPage}>
                                  <ChevronRight className="size-4" />
                               </IconButton>
                               <IconButton>
