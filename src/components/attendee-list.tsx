@@ -26,6 +26,11 @@ export function AttendeeList() {
       setPage(page + 1)
    }
 
+   function goToPreviousPage() {
+      setPage(page - 1)
+
+   }
+
    return (
       <div className="flex flex-col gap-4">
          <div className="flex gap-3 items-center">
@@ -108,7 +113,7 @@ export function AttendeeList() {
                               <IconButton>
                                  <ChevronsLeft className="size-4" />
                               </IconButton>
-                              <IconButton>            
+                              <IconButton onClick={goToPreviousPage}>            
                                <ChevronLeft className="size-4" />
                               </IconButton>
                               <IconButton onClick={goToNextPage}>
