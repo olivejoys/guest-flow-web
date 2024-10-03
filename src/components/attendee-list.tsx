@@ -1,11 +1,17 @@
 import React, { ChangeEvent, useState } from "react";
-import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from 'lucide-react'
-import { IconButton } from "./icon-button";
+import { Search, MoreHorizontal, ChevronsLeft, 
+   ChevronLeft, ChevronRight, ChevronsRight } from 'lucide-react'
+   import { IconButton } from "./icon-button";
 import { Table } from "../table/table";
 import { TableHeader } from "../table/table-header";
 import { TableCell } from "../table/table-cell";
-import { TableRow } from "../table/table-roll";
+import { TableRow } from "../table/table-row";
 import { attendees } from "../data/attendees";
+import dayjs from 'dayjs';
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs().format()
+dayjs.extend(relativeTime);
+
 
 export function AttendeeList() {
    const [search, setSearch] = useState('')
@@ -67,8 +73,13 @@ export function AttendeeList() {
                                  <span>{attendee.email}</span>
                               </div>
                            </TableCell>
-                           <TableCell>7 days ago</TableCell>
-                           <TableCell>3 days ago</TableCell>
+                           <TableCell>
+                           {dayjs().to(dayjs(attendee.createdAt))},
+                        </TableCell>
+                       <TableCell>
+                       {dayjs().to(dayjs(attendee.createdAt))}
+
+                       </TableCell>
                            <TableCell>
                               <IconButton transparent>
                                  <MoreHorizontal className="size-4" />
@@ -84,7 +95,8 @@ export function AttendeeList() {
                       text-zinc-300" colSpan={3}>
                         Showing 10 of 228 items
                      </TableCell>
-                     <TableCell className="py-3 px-4 text-sm text-zinc-300 text-right" colSpan={3}>
+                     <TableCell className="py-3 px-4 text-sm
+                      text-zinc-300 text-right" colSpan={3}>
                         <div className="inline-flex items-center gap-8">
                            <span>Page 1 of 23</span>
                            <div className="flex gap-1.5">
@@ -110,3 +122,7 @@ export function AttendeeList() {
       </div>
    );
 }
+
+
+
+
