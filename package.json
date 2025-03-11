@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "PORT=3000",
     "dev": "vite",
     "build": " tsc -b && vite build",
     "build:css": "npx tailwindcss -i ./src/index.css -o ./dist/index.css --watch",
@@ -11,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "date": "^2.0.5",
     "dayjs": "^1.11.13",
     "express": "^4.21.0",

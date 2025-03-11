@@ -23,16 +23,17 @@ interface Attendee {
 export function AttendeeList() {
    const [search, setSearch] = useState('')
    const [page, setPage] = useState(1);
-   const {attendees, setAttendees} = useState<Attendee[]>([]);
+   const [attendees, setAttendees] = useState<Attendee[]>([]);
+   const pageSize = 10;
 
    //const totalPages = Math.ceil(attendees.length / 10);
-   const totalPages = 5;
+   const [totalPages, setTotalPages] = useState(1);
 
    useEffect(()=>{
        //http://localhost:5000/events/
       // "6ced9c8e-4243-4377-af1f-9307dd1a1842/attendees
      
-      const url = 'http://localhost:5000/events/6ced9c8e-4243-4377-af1f-9307dd1a1842/attendees';
+      const url = `http://localhost:5000/events/26e0b320-c2b0-4010-b603-df5897bf9d85/attendees?page=${page}&size=${pageSize}`
       const  fetchData = async ()=>{
          try {
             const response = await fetch(url);
@@ -52,7 +53,14 @@ export function AttendeeList() {
       
    },[]);
 
+   useEffect(()=>{
+      if(attendees && attendees.length > 0){
+         const totalPagesCalc = Math.ceil(attendees.length / pageSize);
+         setTotalPages(totalPagesCalc);
    
+      }
+     
+   },[attendees]);
 
    function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
       setSearch(event.target.value) 
@@ -60,11 +68,11 @@ export function AttendeeList() {
    }
 
    function goToNextPage() {
-      setPage(page + 1)
+      setPage(page + pageSize)
    }
 
    function goToPreviousPage() {
-      setPage(page - 1)
+      setPage(page - pageSize)
 
    }
 
@@ -114,7 +122,7 @@ export function AttendeeList() {
                   </tr>
                </thead>
                <tbody>
-                  {attendees && attendees.length > 0 && attendees.slice((page - 1) * 10, page * 10).map((attendee) => {
+                  {attendees && attendees.length > 0 && attendees.slice((page - 1) * 10, (page + 1) * 10).map((attendee) => {
                      return (
                         <TableRow key={attendee.id}>
                            <TableCell>
@@ -150,7 +158,7 @@ export function AttendeeList() {
                   <tr>
                      <TableCell className="py-3 px-4 text-sm
                       text-zinc-300" colSpan={3}>
-                        Showing 10 of 228 items {attendees && attendees.length}
+                        Showing {pageSize >= totalPages ? totalPages: pageSize} of {totalPages} items {attendees && attendees.length}
                      </TableCell>
                      <TableCell className="py-3 px-4 text-sm
                       text-zinc-300 text-right" colSpan={3}>
@@ -169,7 +177,8 @@ export function AttendeeList() {
                               disabled={page === totalPages}>
                                  <ChevronRight className="size-4" />
                               </IconButton>
-                              <IconButton onClick={goToLastPage}>
+                              <IconButton onClick={goToLastPage}
+                              disabled={page === 1}>
                                  <ChevronsRight className="size-4" />
                               </IconButton>
                            </div>
